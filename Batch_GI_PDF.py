@@ -1,16 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pytictoc
 t = pytictoc.TicToc()
 t.tic()
-
-
-# In[2]:
-
 
 from PIL import Image 
 import pytesseract 
@@ -26,10 +16,6 @@ import datetime
 import warnings
 warnings.filterwarnings('ignore')
 
-
-# In[3]:
-
-
 client = MongoClient("localhost", 27017)
 db = client["Batch_GI"]
 coll = "Batch_GI"
@@ -37,34 +23,12 @@ db_coll = db[coll]
 
 fs = gridfs.GridFS(db)
 
-
-# In[4]:
-
-
 path = "/home/controllingde/G/Batch_GI/"
-
-
-# In[5]:
-
-
 files = os.listdir(path)
-
-
-# In[6]:
-
-
 pdffiles = [path + x for x in files if x.find(".pdf") > 0]
-
-
-# In[7]:
-
 
 colnames = ['batch', 'item', '_id', 'FS', 'GI', 'MHD', 'filename']
 total_df = pd.DataFrame(columns=colnames)
-
-
-# In[8]:
-
 
 datepattern = ".(1[0-2]|0[1-9]|\d)\/([2-9]\d[1-9]\d|[1-9]\d)."
 batchsign = "Ch.-B.:"
@@ -140,21 +104,3 @@ for f in pdffiles:
 total_df.to_csv(path + "test01.csv")
 total_df.set_index(["_id"], inplace=True, verify_integrity=True)
 t.toc()
-#total_df.head()
-
-
-# In[ ]:
-
-
-#for checkng monodb
-#r = db_coll.find()
-#for l in r:
-#    print(l)
-#    print("\n")
-
-
-# In[ ]:
-
-
-
-
